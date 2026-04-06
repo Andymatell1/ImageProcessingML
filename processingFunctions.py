@@ -227,11 +227,11 @@ def main():
         # originals
         originals.append(vehicle_img)
         # get edges
-        edges.append(getEdges(vehicle_img, 4, 10))
+        edges.append(getEdges(vehicle_img.copy(), 4, 10))
         # get contours
 
-        results = get_body(vehicle_img)
-        curr_image = vehicle_img
+        results = get_body(vehicle_img.copy())
+        curr_image = vehicle_img.copy()
         for x in results:
             cv2.rectangle(curr_image, (x["x"],x["y"]), (x["x"]+x["w"],x["y"]+x["h"]), (0,255,0), 2)
         contours.append(curr_image)
@@ -242,7 +242,7 @@ def main():
         cv2.imshow('Edge Detections ' + images_to_process[x], edges[x])
         # cv2.drawContours(originals[x], contours[x], -1, (0,255,0), 3)
         cv2.imshow('Intermediate Contours ' + images_to_process[x], contours[x])
-
+        cv2.waitKey(0)  
 
 if __name__ == "__main__":
     main()
